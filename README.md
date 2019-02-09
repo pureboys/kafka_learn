@@ -52,4 +52,9 @@ echo "3" > /tmp/zookeeper/myid
 11. 开启一个生产者: ./bin/kafka-console-producer.sh --broker-list kafka1:9092 --topic first 等待发送消息
 12. 开启一个消费者:  ./bin/kafka-console-consumer.sh --bootstrap-server kafka1:9092 --topic first 等待接收消息 --from-beginning 从头开始消费 
 13. 删除topic: ./bin/kafka-topics.sh --delete --topic my-replicated-topic   --zookeeper kafka1:2181
- 
+
+### kafka消费者组
+1. 在同一个消费者组里的成员不能消费相同topic的分区（patitions）, 例如： 当topic只开启了一个patitions时， 同时开启两个消费者，而且这两个消费者在同一个组里的时候，首先开启 kafka-console-consumer.sh 时会报警告说没有多余的分区。 当生成者发送消息时，只有其中的一个消费者能够收到消息。
+2. config/consumer.properties 中有个 `group.id=` 是消费者组
+3. 在开启消费者时使用配置 ./bin/kafka-console-consumer.sh --bootstrap-server kafka1:9092 --topic first --consumer.config config/consumer.properties
+  

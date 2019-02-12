@@ -50,6 +50,7 @@ listeners=PLAINTEXT://kafka1:9092
 zookeeper.connect=kafka1:2181,kafka2:2181,kafka3:2181
 ```
 尤其是 broker.id 分别改为0,1,2 和 zookeeper.connect 改为 zookeeper 连接地址
+
 6.  开启kafka  ./bin/kafka-server-start.sh config/server.properties
 7.  netstat -tpln 查看是否监听 9092 端口
 8.  ./bin/kafka-topics.sh --create --topic first --zookeeper kafka1:2181  --partitions 2  --replication-factor 2 创建一个topic
